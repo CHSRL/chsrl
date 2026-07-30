@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Connected Hydro Systems Research Lab (CHSRL) — IIT Bhubaneswar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B2E38;
+    --basin:#133A46;
+    --paper:#EFF4F1;
+    --paper-alt:#E2ECE7;
+    --teal:#0E7C86;
+    --teal-deep:#0A5C64;
+    --amber:#C97A2B;
+    --line:#C9D9D3;
+    --muted:#4C6A66;
+    --white:#FFFFFF;
+    --display: 'IBM Plex Serif', Georgia, serif;
+    --body: 'IBM Plex Sans', -apple-system, sans-serif;
+    --mono: 'IBM Plex Mono', 'Courier New', monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink); font-family:var(--body);
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--amber); outline-offset:3px;}
+  img,svg{max-width:100%; display:block;}
+  .wrap{max-width:1160px; margin:0 auto; padding:0 28px;}
+  @media (max-width:640px){ .wrap{padding:0 18px;} }
+
+  .utilitybar{background:var(--basin); color:#CFE3E0;}
+  .utilitybar .wrap{display:flex; justify-content:flex-end; gap:22px; padding-top:8px; padding-bottom:8px; font-family:var(--mono); font-size:0.74em; letter-spacing:0.02em;}
+  .utilitybar a{text-decoration:none; opacity:0.85; transition:opacity .15s;}
+  .utilitybar a:hover{opacity:1; color:#fff;}
+
+  .mainnav{background:var(--paper); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:50;}
+  .mainnav .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:14px; padding-bottom:14px; position:relative;}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none;}
+  .brand .mark{width:34px; height:34px;}
+  .brand .word{font-family:var(--display); font-weight:700; font-size:1.18em; color:var(--basin); line-height:1.1;}
+  .brand .sub{display:block; font-family:var(--mono); font-size:0.62em; color:var(--muted); letter-spacing:0.06em; margin-top:1px;}
+  nav.primary{display:flex; gap:26px;}
+  nav.primary a{text-decoration:none; font-size:0.92em; font-weight:500; color:var(--ink); position:relative; padding:4px 0;}
+  nav.primary a::after{content:''; position:absolute; left:0; right:0; bottom:-2px; height:2px; background:var(--teal); transform:scaleX(0); transition:transform .18s ease; transform-origin:left;}
+  nav.primary a:hover::after{transform:scaleX(1);}
+  .navToggle{display:none; background:none; border:1px solid var(--line); border-radius:6px; padding:8px 10px; font-family:var(--mono); cursor:pointer;}
+  @media (max-width:860px){
+    nav.primary{display:none;}
+    .navToggle{display:block;}
+  }
+
+  .hero{position:relative; overflow:hidden; background:linear-gradient(180deg, var(--paper-alt), var(--paper) 78%);}
+  .hero .wrap{position:relative; padding-top:76px; padding-bottom:88px; display:grid; grid-template-columns:1.05fr 0.95fr; gap:40px; align-items:center;}
+  @media (max-width:860px){ .hero .wrap{grid-template-columns:1fr; padding-top:52px; padding-bottom:52px;} }
+  .eyebrow{font-family:var(--mono); font-size:0.78em; letter-spacing:0.1em; color:var(--teal-deep); text-transform:uppercase; margin-bottom:14px; display:flex; align-items:center; gap:8px;}
+  .eyebrow::before{content:''; width:22px; height:2px; background:var(--amber); display:inline-block;}
+  h1.title{font-family:var(--display); font-weight:700; font-size:2.5em; line-height:1.12; color:var(--basin); margin:0 0 18px;}
+  @media (max-width:640px){ h1.title{font-size:1.9em;} }
+  .mission{font-size:1.18em; color:var(--ink); font-weight:500; margin:0 0 20px; max-width:52ch;}
+  .heroCtas{display:flex; gap:14px; flex-wrap:wrap; margin-top:26px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; padding:12px 20px; border-radius:8px; text-decoration:none;
+    font-weight:600; font-size:0.92em; transition:all .15s;
+  }
+  .btn.primary{background:var(--teal); color:#fff;}
+  .btn.primary:hover{background:var(--teal-deep);}
+  .btn.ghost{border:1.5px solid var(--basin); color:var(--basin);}
+  .btn.ghost:hover{background:var(--basin); color:#fff;}
+
+  .heroArt{position:relative; height:380px;}
+  .heroArt svg{width:100%; height:100%;}
+  @media (max-width:860px){ .heroArt{height:260px;} }
+
+  .wavy{height:22px; margin:0 auto; max-width:1160px; padding:0 28px;}
+  .wavy svg{width:100%; height:100%; display:block;}
+
+  section{padding:64px 0;}
+  .sectionHead{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:30px; gap:16px; flex-wrap:wrap;}
+  h2.h2{font-family:var(--display); font-weight:700; font-size:1.55em; color:var(--basin); margin:0;}
+  .sectionLink{font-family:var(--mono); font-size:0.8em; color:var(--teal-deep); text-decoration:none; white-space:nowrap;}
+  .sectionLink:hover{text-decoration:underline;}
+
+  .intro{background:var(--paper-alt);}
+  .intro .wrap{display:grid; grid-template-columns:1.5fr 1fr; gap:48px;}
+  @media (max-width:860px){ .intro .wrap{grid-template-columns:1fr;} }
+  .intro p{font-size:1.02em; color:var(--ink); max-width:66ch;}
+  .statList{display:flex; flex-direction:column; gap:18px; border-left:2px solid var(--line); padding-left:22px;}
+  .stat .n{font-family:var(--mono); font-weight:600; font-size:1.7em; color:var(--teal-deep);}
+  .stat .l{font-size:0.82em; color:var(--muted);}
+
+  .cardGrid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  @media (max-width:860px){ .cardGrid{grid-template-columns:1fr;} }
+  .hCard{background:#fff; border:1px solid var(--line); border-radius:12px; padding:24px; position:relative;}
+  .hCard .icon{width:40px; height:40px; margin-bottom:14px;}
+  .hCard h3{font-family:var(--display); font-size:1.12em; margin:0 0 8px; color:var(--basin);}
+  .hCard p{font-size:0.92em; color:var(--muted); margin:0;}
+
+  .twoCol{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  @media (max-width:860px){ .twoCol{grid-template-columns:1fr;} }
+  .timeline{list-style:none; margin:0; padding:0;}
+  .timeline li{display:flex; gap:16px; padding:16px 0; border-bottom:1px dashed var(--line);}
+  .timeline li:last-child{border-bottom:none;}
+  .timeline .date{font-family:var(--mono); font-size:0.78em; color:var(--teal-deep); white-space:nowrap; padding-top:2px;}
+  .timeline .txt{font-size:0.94em;}
+
+  .pubCard{background:#fff; border:1px solid var(--line); border-radius:12px; padding:22px 24px; margin-bottom:16px;}
+  .pubCard .tag{display:inline-block; font-family:var(--mono); font-size:0.68em; background:var(--paper-alt); color:var(--teal-deep); padding:3px 8px; border-radius:5px; margin-bottom:10px;}
+  .pubCard h3{font-family:var(--display); font-size:1.08em; margin:0 0 6px; color:var(--basin);}
+  .pubCard .authors{font-size:0.88em; color:var(--muted); margin-bottom:10px;}
+  .pubMeta{display:flex; gap:16px; flex-wrap:wrap; align-items:center; font-family:var(--mono); font-size:0.78em; color:var(--muted);}
+  .pubMeta a{color:var(--teal-deep); text-decoration:none;}
+  .pubMeta a:hover{text-decoration:underline;}
+
+  .qlBand{background:var(--basin); color:#fff;}
+  .qlGrid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(255,255,255,0.15); border-radius:12px; overflow:hidden;}
+  @media (max-width:760px){ .qlGrid{grid-template-columns:repeat(2,1fr);} }
+  .qlTile{background:var(--basin); padding:26px 20px; text-decoration:none; color:#fff; transition:background .15s;}
+  .qlTile:hover{background:var(--teal-deep);}
+  .qlTile .t{font-family:var(--display); font-weight:700; font-size:1.05em; margin-bottom:6px;}
+  .qlTile .d{font-size:0.82em; color:#CFE3E0;}
+
+  footer{background:var(--ink); color:#B9CFCB; padding:44px 0 28px; font-size:0.86em;}
+  footer .wrap{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:32px;}
+  @media (max-width:760px){ footer .wrap{grid-template-columns:1fr; gap:22px;} }
+  footer h4{font-family:var(--mono); font-size:0.78em; letter-spacing:0.06em; text-transform:uppercase; color:#7FA39C; margin:0 0 12px;}
+  footer a{text-decoration:none; color:#DCEAE7;}
+  footer a:hover{text-decoration:underline;}
+  footer ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px;}
+  .footBottom{margin-top:32px; padding-top:20px; border-top:1px solid #22434B; font-family:var(--mono); font-size:0.78em; color:#7FA39C; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+
+  @media (prefers-reduced-motion: reduce){
+    * { animation-duration:0.001s !important; animation-iteration-count:1 !important; transition-duration:0.001s !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="utilitybar">
+  <div class="wrap">
+    <a href="opportunities.html">Join Us</a>
+    <a href="publications.html">Publications</a>
+    <a href="software.html">Data</a>
+    <a href="#contact">Contact</a>
+  </div>
+</div>
+
+<div class="mainnav">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg class="mark" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="19" fill="#EFF4F1" stroke="#0E7C86" stroke-width="1.4"/>
+        <circle cx="20" cy="20" r="13" fill="none" stroke="#0E7C86" stroke-width="1.2" opacity="0.6"/>
+        <circle cx="20" cy="20" r="7" fill="#0E7C86" opacity="0.85"/>
+      </svg>
+      <span>
+        <span class="word">CHSRL</span>
+        <span class="sub">CONNECTED HYDRO SYSTEMS RESEARCH LAB</span>
+      </span>
+    </a>
+    <nav class="primary">
+      <a href="#top">Home</a>
+      <a href="about.html">About</a>
+      <a href="people.html">People</a>
+      <a href="publications.html">Publications</a>
+      <a href="software.html">Software &amp; Tools</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="opportunities.html">Opportunities</a>
+    </nav>
+    <button class="navToggle" aria-label="Menu">☰ Menu</button>
+  </div>
+</div>
+
+<div id="top" class="hero">
+  <div class="wrap">
+    <div class="heroText">
+      <div class="eyebrow">Groundwater · Hydrology · Machine Learning</div>
+      <h1 class="title">Connected Hydro Systems<br>Research Lab</h1>
+      <p class="mission">We study flow and transport in saturated and unsaturated zones — and how groundwater, surface water, and land use connect as one system — using numerical and machine-learning models.</p>
+      <div class="heroCtas">
+        <a class="btn primary" href="publications.html">Explore Research →</a>
+        <a class="btn ghost" href="people.html">Meet the Team →</a>
+      </div>
+    </div>
+    <div class="heroArt" id="heroArt"></div>
+  </div>
+</div>
+
+<div class="wavy" aria-hidden="true">
+  <svg viewBox="0 0 1160 22" preserveAspectRatio="none"><path d="M0 11 C 120 22, 240 0, 360 11 S 600 22, 720 11 S 960 0, 1080 11 S 1160 11 1160 11" fill="none" stroke="#C9D9D3" stroke-width="1.4"/></svg>
+</div>
+
+<section class="intro" id="about">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">About the Lab</div>
+      <h2 class="h2" style="margin-bottom:16px;">Groundwater and surface water, studied as one system</h2>
+      <p>The Connected Hydro Systems Research Lab (CHSRL), led by Dr. Aatish Anshuman at IIT Bhubaneswar, works on understanding flow and transport processes in both saturated and unsaturated zones, as well as surface–subsurface water interactions. Our research spans groundwater recharge, contamination source identification, and the impacts of land-use and climate change on groundwater availability. We employ advanced numerical methods (including meshless/meshfree techniques) and machine-learning models — such as LSTMs and swarm-based optimization — to investigate groundwater dynamics and quantify uncertainty. Through interdisciplinary collaboration with hydrologists, remote-sensing experts, and geophysicists, CHSRL works toward sustainable water management strategies for a changing climate.</p>
+    </div>
+    <div class="statList">
+      <div class="stat"><div class="n">14+</div><div class="l">peer-reviewed publications</div></div>
+      <div class="stat"><div class="n">5</div><div class="l">PhD & Masters scholars in the group</div></div>
+      <div class="stat"><div class="n">20+</div><div class="l">conference presentations & invited talks</div></div>
+      <div class="stat"><div class="n">2025</div><div class="l">papers presented at HYDRO & ICCMS</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="highlights">
+  <div class="wrap">
+    <div class="sectionHead">
+      <h2 class="h2">Research Highlights</h2>
+      <a class="sectionLink" href="publications.html">All publications →</a>
+    </div>
+    <div class="cardGrid">
+      <div class="hCard">
+        <svg class="icon" viewBox="0 0 40 40"><circle cx="20" cy="20" r="17" fill="none" stroke="#0E7C86" stroke-width="2"/><circle cx="20" cy="20" r="10" fill="none" stroke="#0E7C86" stroke-width="1.6" opacity="0.6"/><circle cx="20" cy="20" r="3.5" fill="#C97A2B"/></svg>
+        <h3>Inverse Models for Contaminant Source Identification</h3>
+        <p>Parallel deep-learning based simulation–optimization workflows for aquifer parameter estimation and contaminant source identification.</p>
+      </div>
+      <div class="hCard">
+        <svg class="icon" viewBox="0 0 40 40"><path d="M4 30 L14 18 L22 24 L36 8" fill="none" stroke="#0E7C86" stroke-width="2.2" stroke-linecap="round"/><circle cx="36" cy="8" r="2.6" fill="#C97A2B"/></svg>
+        <h3>Numerical Models for Reactive Transport</h3>
+        <p>Meshless/meshfree simulation of species subjected to rate-limited adsorption in highly heterogeneous aquifers.</p>
+      </div>
+      <div class="hCard">
+        <svg class="icon" viewBox="0 0 40 40"><rect x="5" y="20" width="30" height="12" rx="2" fill="none" stroke="#0E7C86" stroke-width="2"/><path d="M5 20 L20 8 L35 20" fill="none" stroke="#0E7C86" stroke-width="2" stroke-linejoin="round"/></svg>
+        <h3>Streamflow Simulation Using Conceptual Models</h3>
+        <p>Comparative evaluation of conceptual rainfall-runoff models against the SWAT model for water resource assessment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="intro">
+  <div class="wrap twoCol">
+    <div>
+      <div class="sectionHead"><h2 class="h2">Latest News</h2></div>
+      <ul class="timeline">
+        <li><span class="date">2026</span><span class="txt">Dr. Aatish presented his work at <a href="https://interpore.org/node/976" target="_blank">Interpore 2026</a>,Nantes, France.</span></li>
+        <li><span class="date">2025</span><span class="txt">Banaja Nayak, Sai Kiran and Jyoti Yadav presented their work at <a href="https://hydro2025.nitrkl.ac.in/dates_1.html" target="_blank">HYDRO 2025</a>, NIT Rourkela.</span></li>
+        <li><span class="date">2025</span><span class="txt">Rojina Samal presented her work on unsaturated flow modeling at <a href="https://www.iccms2025.in" target="_blank">ICCMS 2025</a>, IIT Bhubaneswar.</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="sectionHead"><h2 class="h2">Talks & Recognition</h2></div>
+      <ul class="timeline">
+        <li><span class="date">MAR 2025</span><span class="txt">Invited talk — "Approaches to identify contaminant sources in groundwater," NITI Aayog workshop on sustaining groundwater sources for drinking water supply.</span></li>
+        <li><span class="date">SEP 2024</span><span class="txt">Invited seminar — "Declining efficiency of snow-season soil water input to recharge groundwater in a warming climate," Idaho Water Resources Research Institute.</span></li>
+        <li><span class="date">AWARD</span><span class="txt">Naik and Rastogi Excellence in PhD Research Award, IIT Bombay.</span></li>
+        <li><span class="date">GRANT</span><span class="txt">PM-ECRG, Anusandhan National Research Foundation (ANRF), and Seed Grant, IIT Bhubaneswar.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="publications">
+  <div class="wrap">
+    <div class="sectionHead">
+      <h2 class="h2">Featured Publications</h2>
+      <a class="sectionLink" href="publications.html">Full publication list →</a>
+    </div>
+
+    <div class="pubCard">
+      <span class="tag">JOURNAL PAPER</span>
+      <h3>A parallel workflow framework using encoder-decoder LSTMs for uncertainty quantification in contaminant source identification in groundwater</h3>
+      <div class="authors">Anshuman, A., & Eldho, T. I. — Journal of Hydrology, 627, 129296 (2023)</div>
+      <div class="pubMeta">
+        <a href="https://www.sciencedirect.com/science/article/pii/S002216942300238X" target="_blank">View paper →</a>
+      </div>
+    </div>
+
+    <div class="pubCard">
+      <span class="tag">JOURNAL PAPER</span>
+      <h3>Estimation of contamination release histories using meshless radial point collocation method and multiverse optimization</h3>
+      <div class="authors">Anshuman, A., & Eldho, T. I. — Journal of Hydroinformatics, 25(3) (2023)</div>
+      <div class="pubMeta">
+        <a href="https://iwaponline.com/jh/article/25/3/738/94192/Estimation-of-contamination-release-histories" target="_blank">View paper →</a>
+      </div>
+    </div>
+
+    <div class="pubCard">
+      <span class="tag">JOURNAL PAPER · 2025</span>
+      <h3>Improving prediction of class-imbalanced time series through curation of training data: A case study of frozen ground prediction</h3>
+      <div class="authors">Ghosh, M., Anshuman, A., & Kumar, M. — Journal of Hydrology X, 100201 (2025)</div>
+      <div class="pubMeta">
+        <a href="https://www.sciencedirect.com/science/article/pii/S2589915525000021" target="_blank">View paper →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="qlBand" id="data">
+  <div class="wrap">
+    <div class="qlGrid">
+      <a class="qlTile" href="opportunities.html"><div class="t">Join Us</div><div class="d">PhD & internship opportunities</div></a>
+      <a class="qlTile" href="publications.html"><div class="t">Publications</div><div class="d">Journal papers, chapters & conference talks</div></a>
+      <a class="qlTile" href="software.html"><div class="t">Data & Tutorials</div><div class="d">Open notebooks & analysis tools</div></a>
+      <a class="qlTile" href="#contact"><div class="t">Contact</div><div class="d">Get in touch with the lab</div></a>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div>
+      <h4>Connected Hydro Systems Research Lab</h4>
+      <p style="max-width:32ch;">School of Infrastructure<br>Indian Institute of Technology Bhubaneswar<br>Bhubaneswar, Odisha, India</p>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="people.html">People</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="software.html">Software &amp; Tools</a></li>
+        <li><a href="teaching.html">Teaching</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="mailto:aanshuman@iitbbs.ac.in">aanshuman@iitbbs.ac.in</a></li>
+        <li><a href="https://github.com/aatishanshuman" target="_blank">GitHub</a></li>
+        <li><a href="https://scholar.google.com/citations?hl=en&user=&q=Aatish+Anshuman" target="_blank">Google Scholar</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footBottom">
+    <span>© 2026 Connected Hydro Systems Research Lab</span>
+    <span>Led by Dr. Aatish Anshuman, IIT Bhubaneswar</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const svgNS = "http://www.w3.org/2000/svg";
+  const el = document.getElementById('heroArt');
+  const W = 480, H = 380;
+  const svg = document.createElementNS(svgNS,'svg');
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.setAttribute('preserveAspectRatio','xMidYMid meet');
+
+  const cx = W*0.56, cy = H*0.55;
+  const rings = 6;
+  const baseColors = ['#DDEBE6','#C7DED7','#A9CFC5','#7FBBAC','#4CA394','#0E7C86'];
+
+  function smoothPath(pts){
+    let d = `M ${pts[0][0]} ${pts[0][1]} `;
+    const n = pts.length;
+    for(let i=0;i<n;i++){
+      const p0 = pts[i];
+      const p1 = pts[(i+1)%n];
+      const mx = (p0[0]+p1[0])/2, my=(p0[1]+p1[1])/2;
+      d += `Q ${p0[0]} ${p0[1]} ${mx} ${my} `;
+    }
+    d += 'Z';
+    return d;
+  }
+
+  function ringPoints(baseR, variance, seed){
+    const pts = [];
+    const N = 26;
+    for(let i=0;i<N;i++){
+      const a = (i/N)*Math.PI*2;
+      const r = baseR + variance*(
+        0.6*Math.sin(a*2 + seed) + 0.4*Math.sin(a*3.3 + seed*1.7) + 0.3*Math.sin(a*5.1+seed*0.6)
+      );
+      pts.push([cx + r*Math.cos(a), cy + r*Math.sin(a)*0.82]);
+    }
+    return pts;
+  }
+
+  const seed = 2.4;
+  let outerPathD = null;
+  for(let i=0;i<rings;i++){
+    const t = i/(rings-1);
+    const baseR = 168 - t*128;
+    const variance = 22 - t*10;
+    const pts = ringPoints(baseR, variance, seed + i*0.85);
+    const d = smoothPath(pts);
+    if(i===0) outerPathD = d;
+    const path = document.createElementNS(svgNS,'path');
+    path.setAttribute('d', d);
+    path.setAttribute('fill', i===rings-1 ? baseColors[i] : 'none');
+    path.setAttribute('stroke', baseColors[i]);
+    path.setAttribute('stroke-width', i===rings-1 ? 0 : 1.6);
+    path.setAttribute('opacity', 0.95);
+    svg.appendChild(path);
+  }
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduceMotion){
+    const dropGroup = document.createElementNS(svgNS,'g');
+    const drop = document.createElementNS(svgNS,'circle');
+    drop.setAttribute('r','4.2');
+    drop.setAttribute('fill','#C97A2B');
+    const guidePath = document.createElementNS(svgNS,'path');
+    guidePath.setAttribute('d', outerPathD);
+    guidePath.setAttribute('id','contourGuide');
+    guidePath.setAttribute('fill','none');
+    guidePath.setAttribute('stroke','none');
+    svg.appendChild(guidePath);
+    const anim = document.createElementNS(svgNS,'animateMotion');
+    anim.setAttribute('dur','16s');
+    anim.setAttribute('repeatCount','indefinite');
+    anim.setAttribute('rotate','0');
+    const mpath = document.createElementNS(svgNS,'mpath');
+    mpath.setAttributeNS('http://www.w3.org/1999/xlink','href','#contourGuide');
+    anim.appendChild(mpath);
+    drop.appendChild(anim);
+    dropGroup.appendChild(drop);
+    svg.appendChild(dropGroup);
+  }
+
+  el.appendChild(svg);
+})();
+
+document.querySelector('.navToggle')?.addEventListener('click', function(){
+  const nav = document.querySelector('nav.primary');
+  const isOpen = nav.style.display === 'flex';
+  nav.style.display = isOpen ? 'none' : 'flex';
+  nav.style.flexDirection = 'column';
+  nav.style.position='absolute'; nav.style.top='100%'; nav.style.left='0'; nav.style.right='0';
+  nav.style.background='#EFF4F1'; nav.style.padding='16px 24px'; nav.style.borderBottom='1px solid #C9D9D3';
+  nav.style.gap='14px';
+});
+</script>
+
+</body>
+</html>

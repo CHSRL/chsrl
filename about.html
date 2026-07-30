@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About the Group — Connected Hydro Systems Research Lab (CHSRL)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B2E38; --basin:#133A46; --paper:#EFF4F1; --paper-alt:#E2ECE7;
+    --teal:#0E7C86; --teal-deep:#0A5C64; --amber:#C97A2B; --line:#C9D9D3; --muted:#4C6A66;
+    --display:'IBM Plex Serif', Georgia, serif; --body:'IBM Plex Sans', -apple-system, sans-serif; --mono:'IBM Plex Mono','Courier New',monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--body); line-height:1.55; -webkit-font-smoothing:antialiased;}
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--amber); outline-offset:3px;}
+  svg{max-width:100%; display:block;}
+  .wrap{max-width:1160px; margin:0 auto; padding:0 28px;}
+  @media (max-width:640px){ .wrap{padding:0 18px;} }
+
+  .utilitybar{background:var(--basin); color:#CFE3E0;}
+  .utilitybar .wrap{display:flex; justify-content:flex-end; gap:22px; padding-top:8px; padding-bottom:8px; font-family:var(--mono); font-size:0.74em;}
+  .utilitybar a{text-decoration:none; opacity:0.85; transition:opacity .15s;}
+  .utilitybar a:hover{opacity:1; color:#fff;}
+
+  .mainnav{background:var(--paper); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:50;}
+  .mainnav .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:14px; padding-bottom:14px; position:relative;}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none;}
+  .brand .mark{width:34px; height:34px;}
+  .brand .word{font-family:var(--display); font-weight:700; font-size:1.18em; color:var(--basin); line-height:1.1;}
+  .brand .sub{display:block; font-family:var(--mono); font-size:0.62em; color:var(--muted); letter-spacing:0.06em; margin-top:1px;}
+  nav.primary{display:flex; gap:26px;}
+  nav.primary a{text-decoration:none; font-size:0.92em; font-weight:500; color:var(--ink); position:relative; padding:4px 0;}
+  nav.primary a::after{content:''; position:absolute; left:0; right:0; bottom:-2px; height:2px; background:var(--teal); transform:scaleX(0); transition:transform .18s ease; transform-origin:left;}
+  nav.primary a:hover::after{transform:scaleX(1);}
+  nav.primary a.current::after{transform:scaleX(1);}
+  nav.primary a.current{color:var(--teal-deep); font-weight:600;}
+  .navToggle{display:none; background:none; border:1px solid var(--line); border-radius:6px; padding:8px 10px; font-family:var(--mono); cursor:pointer;}
+  @media (max-width:860px){ nav.primary{display:none;} .navToggle{display:block;} }
+
+  .pageHeader{background:linear-gradient(180deg, var(--paper-alt), var(--paper) 85%); padding:52px 0 40px;}
+  .pageHeader .wrap{display:grid; grid-template-columns:1fr auto; align-items:center; gap:30px;}
+  @media (max-width:760px){ .pageHeader .wrap{grid-template-columns:1fr;} }
+  .eyebrow{font-family:var(--mono); font-size:0.78em; letter-spacing:0.1em; color:var(--teal-deep); text-transform:uppercase; margin-bottom:12px; display:flex; align-items:center; gap:8px;}
+  .eyebrow::before{content:''; width:22px; height:2px; background:var(--amber); display:inline-block;}
+  h1.pageTitle{font-family:var(--display); font-weight:700; font-size:2.1em; color:var(--basin); margin:0 0 10px;}
+  .pageDesc{font-size:1.02em; color:var(--muted); max-width:58ch; margin:0;}
+  .headerArt{width:110px; height:110px;}
+
+  section{padding:36px 0 64px;}
+  .sectionHead{margin-bottom:26px;}
+  h2.h2{font-family:var(--display); font-weight:700; font-size:1.4em; color:var(--basin); margin:0;}
+  .sectionSub{font-size:0.88em; color:var(--muted); margin:4px 0 0;}
+
+  .facGrid{display:grid; grid-template-columns:repeat(2,1fr); gap:20px;}
+  @media (max-width:760px){ .facGrid{grid-template-columns:1fr;} }
+  .facCard{background:#fff; border:1px solid var(--line); border-radius:14px; padding:24px; display:flex; gap:18px; align-items:flex-start;}
+  .facIcon{width:52px; height:52px; flex-shrink:0;}
+  .facCard h3{font-family:var(--display); font-size:1.08em; margin:0 0 8px; color:var(--basin);}
+  .facCard p{font-size:0.9em; color:var(--muted); margin:0;}
+
+  .skillGrid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:860px){ .skillGrid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:600px){ .skillGrid{grid-template-columns:1fr;} }
+  .skillCard{background:#fff; border:1px solid var(--line); border-radius:14px; padding:22px;}
+  .skillCard h3{font-family:var(--mono); font-size:0.82em; letter-spacing:0.04em; text-transform:uppercase; color:var(--teal-deep); margin:0 0 14px;}
+  .chipRow{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{font-family:var(--mono); font-size:0.78em; background:var(--paper-alt); color:var(--ink); padding:5px 11px; border-radius:6px;}
+
+  .codeTeaserList{display:flex; flex-direction:column; gap:1px; background:var(--line); border-radius:12px; overflow:hidden; border:1px solid var(--line); margin-bottom:20px;}
+  .codeTeaserRow{background:#fff; padding:16px 22px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;}
+  .codeTeaserRow h4{font-family:var(--mono); font-size:0.95em; margin:0; color:var(--basin); font-weight:600;}
+  .codeTeaserDesc{font-size:0.85em; color:var(--muted); margin-top:2px;}
+  .codeTeaserLang{font-family:var(--mono); font-size:0.68em; padding:3px 9px; border-radius:5px; white-space:nowrap;}
+  .lang-python{background:#E2ECE7; color:#2A6B57;}
+  .seeAllLink{
+    display:inline-flex; align-items:center; gap:6px; font-family:var(--mono); font-size:0.85em;
+    color:var(--teal-deep); text-decoration:none;
+  }
+  .seeAllLink:hover{text-decoration:underline;}
+
+  .awardsList{display:flex; flex-direction:column; gap:1px; background:var(--line); border-radius:12px; overflow:hidden; border:1px solid var(--line);}
+  .awardRow{background:#fff; padding:16px 22px; display:flex; align-items:center; gap:14px;}
+  .awardRow .dot{width:8px; height:8px; border-radius:50%; background:var(--amber); flex-shrink:0;}
+  .awardRow span{font-size:0.92em; color:var(--ink);}
+
+  .note{font-size:0.78em; color:var(--muted); font-family:var(--mono); margin-top:22px;}
+
+  footer{background:var(--ink); color:#B9CFCB; padding:44px 0 28px; font-size:0.86em;}
+  footer .wrap{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:32px;}
+  @media (max-width:760px){ footer .wrap{grid-template-columns:1fr; gap:22px;} }
+  footer h4{font-family:var(--mono); font-size:0.78em; letter-spacing:0.06em; text-transform:uppercase; color:#7FA39C; margin:0 0 12px;}
+  footer a{text-decoration:none; color:#DCEAE7;}
+  footer a:hover{text-decoration:underline;}
+  footer ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px;}
+  .footBottom{margin-top:32px; padding-top:20px; border-top:1px solid #22434B; font-family:var(--mono); font-size:0.78em; color:#7FA39C; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+
+  @media (prefers-reduced-motion: reduce){ * { animation-duration:0.001s !important; transition-duration:0.001s !important; } }
+</style>
+</head>
+<body>
+
+<div class="utilitybar">
+  <div class="wrap">
+    <a href="opportunities.html">Join Us</a>
+    <a href="publications.html">Publications</a>
+    <a href="software.html">Data</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</div>
+
+<div class="mainnav">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="mark" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="19" fill="#EFF4F1" stroke="#0E7C86" stroke-width="1.4"/>
+        <circle cx="20" cy="20" r="13" fill="none" stroke="#0E7C86" stroke-width="1.2" opacity="0.6"/>
+        <circle cx="20" cy="20" r="7" fill="#0E7C86" opacity="0.85"/>
+      </svg>
+      <span><span class="word">CHSRL</span><span class="sub">CONNECTED HYDRO SYSTEMS RESEARCH LAB</span></span>
+    </a>
+    <nav class="primary">
+      <a href="index.html">Home</a>
+      <a href="about.html" class="current">About</a>
+      <a href="people.html">People</a>
+      <a href="publications.html">Publications</a>
+      <a href="software.html">Software &amp; Tools</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="opportunities.html">Opportunities</a>
+    </nav>
+    <button class="navToggle" aria-label="Menu">☰ Menu</button>
+  </div>
+</div>
+
+<div class="pageHeader">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">The Lab</div>
+      <h1 class="pageTitle">About the Group</h1>
+      <p class="pageDesc">CHSRL's research approach, technical toolkit, and recognitions — from meshless numerical methods to machine learning for groundwater systems.</p>
+    </div>
+    <svg class="headerArt" viewBox="0 0 110 110" fill="none">
+      <rect x="15" y="30" width="80" height="55" rx="4" fill="none" stroke="#0E7C86" stroke-width="2"/>
+      <line x1="15" y1="45" x2="95" y2="45" stroke="#0E7C86" stroke-width="1.4" opacity="0.6"/>
+      <circle cx="30" cy="37.5" r="2.5" fill="#C97A2B"/>
+      <circle cx="40" cy="37.5" r="2.5" fill="#4CA394"/>
+      <rect x="26" y="55" width="20" height="20" fill="none" stroke="#4CA394" stroke-width="1.6"/>
+      <rect x="54" y="55" width="30" height="20" fill="none" stroke="#7FBBAC" stroke-width="1.6"/>
+    </svg>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="sectionHead">
+      <h2 class="h2">Research Focus</h2>
+      <p class="sectionSub">What the group works on, in practice.</p>
+    </div>
+    <div class="facGrid">
+
+      <div class="facCard">
+        <svg class="facIcon" viewBox="0 0 52 52"><rect x="8" y="8" width="36" height="24" rx="3" fill="none" stroke="#0E7C86" stroke-width="2"/><circle cx="17" cy="20" r="4" fill="none" stroke="#0E7C86" stroke-width="1.8"/><rect x="27" y="16" width="12" height="8" fill="none" stroke="#0E7C86" stroke-width="1.6"/><line x1="16" y1="38" x2="36" y2="38" stroke="#4CA394" stroke-width="2"/><line x1="26" y1="32" x2="26" y2="38" stroke="#4CA394" stroke-width="2"/></svg>
+        <div>
+          <h3>Groundwater Flow & Contaminant Transport</h3>
+          <p>Simulation of flow and reactive transport (including rate-limited adsorption) in highly heterogeneous saturated and unsaturated aquifers, using meshless/meshfree numerical methods.</p>
+        </div>
+      </div>
+
+      <div class="facCard">
+        <svg class="facIcon" viewBox="0 0 52 52"><rect x="6" y="10" width="40" height="26" rx="2" fill="none" stroke="#0E7C86" stroke-width="2"/><line x1="6" y1="18" x2="46" y2="18" stroke="#0E7C86" stroke-width="1.2" opacity="0.5"/><line x1="6" y1="26" x2="46" y2="26" stroke="#0E7C86" stroke-width="1.2" opacity="0.5"/><rect x="16" y="40" width="20" height="4" rx="1" fill="#4CA394"/></svg>
+        <div>
+          <h3>Inverse Modeling & Contaminant Source ID</h3>
+          <p>Encoder-decoder LSTM and surrogate-optimization workflows (multiverse optimization, particle swarm optimization) for identifying groundwater contamination release histories under uncertainty.</p>
+        </div>
+      </div>
+
+      <div class="facCard">
+        <svg class="facIcon" viewBox="0 0 52 52"><circle cx="26" cy="24" r="16" fill="none" stroke="#0E7C86" stroke-width="2"/><circle cx="26" cy="24" r="10" fill="none" stroke="#4CA394" stroke-width="1.6" opacity="0.7"/><circle cx="26" cy="24" r="4" fill="#C97A2B"/></svg>
+        <div>
+          <h3>Surface Water–Groundwater Interaction</h3>
+          <p>Conceptual rainfall-runoff modeling, streamflow simulation, and coupled surface-groundwater modeling benchmarked against models such as SWAT.</p>
+        </div>
+      </div>
+
+      <div class="facCard">
+        <svg class="facIcon" viewBox="0 0 52 52"><rect x="10" y="22" width="32" height="14" rx="3" fill="none" stroke="#0E7C86" stroke-width="2"/><circle cx="17" cy="38" r="3.5" fill="none" stroke="#0E7C86" stroke-width="1.8"/><circle cx="35" cy="38" r="3.5" fill="none" stroke="#0E7C86" stroke-width="1.8"/><path d="M14 22 L18 12 L34 12 L38 22" fill="none" stroke="#4CA394" stroke-width="1.8"/></svg>
+        <div>
+          <h3>Climate Change & Recharge Dynamics</h3>
+          <p>Studying groundwater recharge dynamics, snow-season soil water input, and the influence of a warming climate on groundwater systems in cold and monsoon-driven regions alike.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--paper-alt); padding-top:56px;">
+  <div class="wrap">
+    <div class="sectionHead">
+      <h2 class="h2">Technical Toolkit</h2>
+      <p class="sectionSub">Methods and tools the group works with.</p>
+    </div>
+    <div class="skillGrid">
+
+      <div class="skillCard">
+        <h3>Programming Languages</h3>
+        <div class="chipRow">
+          <span class="chip">Python</span><span class="chip">MATLAB</span>
+        </div>
+      </div>
+
+      <div class="skillCard">
+        <h3>Numerical Methods</h3>
+        <div class="chipRow">
+          <span class="chip">Meshless / Meshfree Methods</span><span class="chip">Radial Point Collocation (RPCM)</span><span class="chip">SWAT</span>
+        </div>
+      </div>
+
+      <div class="skillCard">
+        <h3>Machine Learning</h3>
+        <div class="chipRow">
+          <span class="chip">LSTM / Seq2Seq</span><span class="chip">Multilayer Perceptron</span><span class="chip">Deep Neural Networks</span>
+        </div>
+      </div>
+
+      <div class="skillCard">
+        <h3>Optimization</h3>
+        <div class="chipRow">
+          <span class="chip">Particle Swarm Optimization</span><span class="chip">Multiverse Optimizer</span><span class="chip">Quantum-Behaved PSO</span>
+        </div>
+      </div>
+
+      <div class="skillCard">
+        <h3>Remote Sensing & Data</h3>
+        <div class="chipRow">
+          <span class="chip">GRACE Data</span><span class="chip">Reanalysis Products</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sectionHead">
+      <h2 class="h2">Open Tutorials & Notebooks</h2>
+      <p class="sectionSub">Code shared by the group to help others reuse our methods.</p>
+    </div>
+
+    <div class="codeTeaserList">
+      <div class="codeTeaserRow">
+        <div><h4>Groundwater_Hydrology_Tutorials</h4><div class="codeTeaserDesc">Visualization of GRACE liquid water equivalent (LWE) data — extraction of LWE timeseries and plotting.</div></div>
+        <span class="codeTeaserLang lang-python">Python</span>
+      </div>
+    </div>
+
+    <a class="seeAllLink" href="software.html">See all tools &amp; tutorials →</a>
+  </div>
+</section>
+
+<section style="background:var(--paper-alt); padding-top:56px;">
+  <div class="wrap">
+    <div class="sectionHead">
+      <h2 class="h2">Awards & Grants</h2>
+      <p class="sectionSub">Recognitions received by the group and its PI.</p>
+    </div>
+    <div class="awardsList">
+      <div class="awardRow"><span class="dot"></span><span>Naik and Rastogi Excellence in PhD Research Award, IIT Bombay</span></div>
+      <div class="awardRow"><span class="dot"></span><span>Best Presentation and Best Paper, HYDRO 2020 International Conference, Rourkela</span></div>
+      <div class="awardRow"><span class="dot"></span><span>Seed Grant, Indian Institute of Technology Bhubaneswar</span></div>
+      <div class="awardRow"><span class="dot"></span><span>PM-ECRG, Anusandhan National Research Foundation (ANRF)</span></div>
+      <div class="awardRow"><span class="dot"></span><span>Berkner Fellowship for attending AGU Fall Meeting 2020</span></div>
+      <div class="awardRow"><span class="dot"></span><span>Travel Grant from IIT Bombay for attending EWRA 2019</span></div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div>
+      <h4>Connected Hydro Systems Research Lab</h4>
+      <p style="max-width:32ch;">School of Infrastructure<br>Indian Institute of Technology Bhubaneswar<br>Bhubaneswar, Odisha, India</p>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="people.html">People</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="software.html">Software &amp; Tools</a></li>
+        <li><a href="teaching.html">Teaching</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="mailto:aanshuman@iitbbs.ac.in">aanshuman@iitbbs.ac.in</a></li>
+        <li><a href="https://github.com/aatishanshuman" target="_blank">GitHub</a></li>
+        <li><a href="https://scholar.google.com/citations?hl=en&user=&q=Aatish+Anshuman" target="_blank">Google Scholar</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footBottom">
+    <span>© 2026 Connected Hydro Systems Research Lab</span>
+    <span>Led by Dr. Aatish Anshuman, IIT Bhubaneswar</span>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.navToggle')?.addEventListener('click', function(){
+  const nav = document.querySelector('nav.primary');
+  const isOpen = nav.style.display === 'flex';
+  nav.style.display = isOpen ? 'none' : 'flex';
+  nav.style.flexDirection = 'column';
+  nav.style.position='absolute'; nav.style.top='100%'; nav.style.left='0'; nav.style.right='0';
+  nav.style.background='#EFF4F1'; nav.style.padding='16px 24px'; nav.style.borderBottom='1px solid #C9D9D3';
+  nav.style.gap='14px';
+});
+</script>
+
+</body>
+</html>

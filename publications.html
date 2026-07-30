@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Publications — Connected Hydro Systems Research Lab (CHSRL)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B2E38; --basin:#133A46; --paper:#EFF4F1; --paper-alt:#E2ECE7;
+    --teal:#0E7C86; --teal-deep:#0A5C64; --amber:#C97A2B; --line:#C9D9D3; --muted:#4C6A66;
+    --display:'IBM Plex Serif', Georgia, serif; --body:'IBM Plex Sans', -apple-system, sans-serif; --mono:'IBM Plex Mono','Courier New',monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--body); line-height:1.55; -webkit-font-smoothing:antialiased;}
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--amber); outline-offset:3px;}
+  svg{max-width:100%; display:block;}
+  .wrap{max-width:1160px; margin:0 auto; padding:0 28px;}
+  @media (max-width:640px){ .wrap{padding:0 18px;} }
+
+  .utilitybar{background:var(--basin); color:#CFE3E0;}
+  .utilitybar .wrap{display:flex; justify-content:flex-end; gap:22px; padding-top:8px; padding-bottom:8px; font-family:var(--mono); font-size:0.74em;}
+  .utilitybar a{text-decoration:none; opacity:0.85; transition:opacity .15s;}
+  .utilitybar a:hover{opacity:1; color:#fff;}
+
+  .mainnav{background:var(--paper); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:50;}
+  .mainnav .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:14px; padding-bottom:14px; position:relative;}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none;}
+  .brand .mark{width:34px; height:34px;}
+  .brand .word{font-family:var(--display); font-weight:700; font-size:1.18em; color:var(--basin); line-height:1.1;}
+  .brand .sub{display:block; font-family:var(--mono); font-size:0.62em; color:var(--muted); letter-spacing:0.06em; margin-top:1px;}
+  nav.primary{display:flex; gap:26px;}
+  nav.primary a{text-decoration:none; font-size:0.92em; font-weight:500; color:var(--ink); position:relative; padding:4px 0;}
+  nav.primary a::after{content:''; position:absolute; left:0; right:0; bottom:-2px; height:2px; background:var(--teal); transform:scaleX(0); transition:transform .18s ease; transform-origin:left;}
+  nav.primary a:hover::after{transform:scaleX(1);}
+  nav.primary a.current::after{transform:scaleX(1);}
+  nav.primary a.current{color:var(--teal-deep); font-weight:600;}
+  .navToggle{display:none; background:none; border:1px solid var(--line); border-radius:6px; padding:8px 10px; font-family:var(--mono); cursor:pointer;}
+  @media (max-width:860px){ nav.primary{display:none;} .navToggle{display:block;} }
+
+  .pageHeader{background:linear-gradient(180deg, var(--paper-alt), var(--paper) 85%); padding:52px 0 30px;}
+  .pageHeader .wrap{display:grid; grid-template-columns:1fr auto; align-items:center; gap:30px;}
+  @media (max-width:760px){ .pageHeader .wrap{grid-template-columns:1fr;} }
+  .eyebrow{font-family:var(--mono); font-size:0.78em; letter-spacing:0.1em; color:var(--teal-deep); text-transform:uppercase; margin-bottom:12px; display:flex; align-items:center; gap:8px;}
+  .eyebrow::before{content:''; width:22px; height:2px; background:var(--amber); display:inline-block;}
+  h1.pageTitle{font-family:var(--display); font-weight:700; font-size:2.1em; color:var(--basin); margin:0 0 10px;}
+  .pageDesc{font-size:1.02em; color:var(--muted); max-width:60ch; margin:0;}
+  .headerArt{width:110px; height:110px;}
+
+  section{padding:8px 0 64px;}
+
+  .toolbar{position:sticky; top:64px; background:var(--paper); z-index:40; padding:20px 0 16px; border-bottom:1px solid var(--line);}
+  .searchRow{display:flex; gap:12px; margin-bottom:14px; flex-wrap:wrap;}
+  .searchBox{flex:1; min-width:220px; position:relative;}
+  .searchBox input{
+    width:100%; padding:11px 16px 11px 38px; border-radius:10px; border:1.5px solid var(--line);
+    font-family:var(--body); font-size:0.94em; background:#fff; color:var(--ink);
+  }
+  .searchBox input:focus{border-color:var(--teal); outline:none;}
+  .searchBox .icon{position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:0.95em; color:var(--muted); pointer-events:none;}
+  .sortSelect{
+    padding:11px 14px; border-radius:10px; border:1.5px solid var(--line); background:#fff; color:var(--ink);
+    font-family:var(--mono); font-size:0.85em;
+  }
+  .filterBar{display:flex; gap:8px; flex-wrap:wrap;}
+  .filterBtn{
+    font-family:var(--mono); font-size:0.76em; padding:8px 14px; border-radius:18px; border:1.5px solid var(--line);
+    background:#fff; color:var(--ink); cursor:pointer; transition:all .15s; font-weight:500; white-space:nowrap;
+  }
+  .filterBtn:hover{border-color:var(--teal);}
+  .filterBtn.active{background:var(--teal); border-color:var(--teal); color:#fff;}
+  .filterBtn .cnt{opacity:0.75; margin-left:3px;}
+
+  .resultsInfo{font-family:var(--mono); font-size:0.78em; color:var(--muted); margin:18px 0 16px;}
+
+  .pubCard{background:#fff; border:1px solid var(--line); border-radius:12px; padding:22px 24px; margin-bottom:16px;}
+  .pubTop{display:flex; justify-content:space-between; gap:16px; align-items:flex-start; flex-wrap:wrap;}
+  .tag{display:inline-block; font-family:var(--mono); font-size:0.68em; background:var(--paper-alt); color:var(--teal-deep); padding:3px 9px; border-radius:5px; margin-bottom:10px; letter-spacing:0.03em;}
+  .pubCard h3{font-family:var(--display); font-size:1.1em; margin:0 0 6px; color:var(--basin); max-width:70ch;}
+  .authors{font-size:0.88em; color:var(--muted); margin-bottom:2px;}
+  .venue{font-size:0.85em; color:var(--muted); font-style:italic;}
+
+  .pubMeta{display:flex; gap:16px; flex-wrap:wrap; align-items:center; font-family:var(--mono); font-size:0.78em; color:var(--muted); margin-top:14px; padding-top:14px; border-top:1px dashed var(--line);}
+  .pubMeta a, .pubMeta button.linklike{color:var(--teal-deep); text-decoration:none; background:none; border:none; font-family:var(--mono); font-size:1em; cursor:pointer; padding:0;}
+  .pubMeta a:hover, .pubMeta button.linklike:hover{text-decoration:underline;}
+
+  .bibtexBlock{
+    display:none; margin-top:14px; background:var(--paper-alt); border-radius:8px; padding:14px 16px;
+    font-family:var(--mono); font-size:0.78em; white-space:pre-wrap; position:relative; color:var(--ink);
+  }
+  .bibtexBlock.open{display:block;}
+  .copyBtn{
+    position:absolute; top:10px; right:10px; font-family:var(--mono); font-size:0.7em; background:var(--teal);
+    color:#fff; border:none; border-radius:5px; padding:4px 9px; cursor:pointer;
+  }
+  .copyBtn:hover{background:var(--teal-deep);}
+  .copyBtn.copied{background:var(--amber);}
+
+  .emptyState{text-align:center; padding:60px 20px; color:var(--muted);}
+  .emptyState .big{font-size:2.2em; margin-bottom:10px;}
+  .emptyState h3{font-family:var(--display); color:var(--basin); margin:0 0 8px;}
+
+  .note{font-size:0.78em; color:var(--muted); font-family:var(--mono); margin-top:20px;}
+
+  footer{background:var(--ink); color:#B9CFCB; padding:44px 0 28px; font-size:0.86em;}
+  footer .wrap{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:32px;}
+  @media (max-width:760px){ footer .wrap{grid-template-columns:1fr; gap:22px;} }
+  footer h4{font-family:var(--mono); font-size:0.78em; letter-spacing:0.06em; text-transform:uppercase; color:#7FA39C; margin:0 0 12px;}
+  footer a{text-decoration:none; color:#DCEAE7;}
+  footer a:hover{text-decoration:underline;}
+  footer ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px;}
+  .footBottom{margin-top:32px; padding-top:20px; border-top:1px solid #22434B; font-family:var(--mono); font-size:0.78em; color:#7FA39C; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+
+  @media (prefers-reduced-motion: reduce){ * { animation-duration:0.001s !important; transition-duration:0.001s !important; } }
+</style>
+</head>
+<body>
+
+<div class="utilitybar">
+  <div class="wrap">
+    <a href="opportunities.html">Join Us</a>
+    <a href="publications.html">Publications</a>
+    <a href="software.html">Data</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</div>
+
+<div class="mainnav">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="mark" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="19" fill="#EFF4F1" stroke="#0E7C86" stroke-width="1.4"/>
+        <circle cx="20" cy="20" r="13" fill="none" stroke="#0E7C86" stroke-width="1.2" opacity="0.6"/>
+        <circle cx="20" cy="20" r="7" fill="#0E7C86" opacity="0.85"/>
+      </svg>
+      <span><span class="word">CHSRL</span><span class="sub">CONNECTED HYDRO SYSTEMS RESEARCH LAB</span></span>
+    </a>
+    <nav class="primary">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="people.html">People</a>
+      <a href="publications.html" class="current">Publications</a>
+      <a href="software.html">Software &amp; Tools</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="opportunities.html">Opportunities</a>
+    </nav>
+    <button class="navToggle" aria-label="Menu">☰ Menu</button>
+  </div>
+</div>
+
+<div class="pageHeader">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Research Output</div>
+      <h1 class="pageTitle">Publications</h1>
+      <p class="pageDesc">Journal papers, book chapters, conference presentations, and invited talks from CHSRL — searchable and filterable.</p>
+    </div>
+    <svg class="headerArt" viewBox="0 0 110 110" fill="none">
+      <rect x="15" y="55" width="14" height="40" fill="#7FBBAC"/>
+      <rect x="35" y="35" width="14" height="60" fill="#4CA394"/>
+      <rect x="55" y="45" width="14" height="50" fill="#0E7C86"/>
+      <rect x="75" y="20" width="14" height="75" fill="#0A5C64"/>
+    </svg>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="toolbar">
+      <div class="searchRow">
+        <div class="searchBox">
+          <span class="icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Search by title, author, or venue…">
+        </div>
+        <select id="sortSelect" class="sortSelect">
+          <option value="newest">Sort: Newest first</option>
+          <option value="oldest">Sort: Oldest first</option>
+        </select>
+      </div>
+      <div class="filterBar" id="filterBar"></div>
+    </div>
+
+    <div class="resultsInfo" id="resultsInfo"></div>
+    <div id="pubList"></div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div>
+      <h4>Connected Hydro Systems Research Lab</h4>
+      <p style="max-width:32ch;">School of Infrastructure<br>Indian Institute of Technology Bhubaneswar<br>Bhubaneswar, Odisha, India</p>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="people.html">People</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="software.html">Software &amp; Tools</a></li>
+        <li><a href="teaching.html">Teaching</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="mailto:aanshuman@iitbbs.ac.in">aanshuman@iitbbs.ac.in</a></li>
+        <li><a href="https://github.com/aatishanshuman" target="_blank">GitHub</a></li>
+        <li><a href="https://scholar.google.com/citations?hl=en&user=&q=Aatish+Anshuman" target="_blank">Google Scholar</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footBottom">
+    <span>© 2026 Connected Hydro Systems Research Lab</span>
+    <span>Led by Dr. Aatish Anshuman, IIT Bhubaneswar</span>
+  </div>
+</footer>
+
+<script>
+const TYPES = [
+  {key:'journal', label:'Journal Papers'},
+  {key:'chapter', label:'Book/Book Chapters'},
+  {key:'conference', label:'Conference Papers'},
+  {key:'talk', label:'Invited Talks'},
+];
+
+const PUBS = [
+    // ---- Book ----
+  // ---- Book Chapters ----
+  {id:'c1', type:'chapter', title:'Computational models for water resource management: opportunities and challenges',
+    authors:'Anshuman, A.; Eldho, T. I.', venue:'In: Modeling and Simulation of Environmental Systems: A Computation Approach', year:2022,
+    link:'https://www.taylorfrancis.com/chapters/edit/10.1201/9781003203445-1/computational-models-water-resource-management-aatish-anshuman-eldho'},
+  {id:'c2', type:'chapter', title:'Simulation of Flow and Transport Process—Scope of Meshless Methods',
+    authors:'Anshuman, A.; Eldho, T. I.', venue:'In: Recent Advances in Computational Mechanics and Simulations', year:2020,
+    link:'https://link.springer.com/chapter/10.1007/978-981-15-8315-5_21'},
+
+  // ---- Journal Papers ----
+
+  
+  {id:'j1', type:'journal', title:'A Comparative Study of State-of-the-Art Meshless Methods for Flow and Transport Simulation in Porous Media',
+    authors:'Eldho, T. I., Das, S., Anshuman, A., & Pathania, T.', venue:' CMES-Computer Modeling in Engineering and Sciences, 147(2).', year:2026,
+    link:'https://www.sciencedirect.com/org/science/article/pii/S1526149226002031'},
+
+  {id:'j2', type:'journal', title:'Improving prediction of class-imbalanced time series through curation of training data: A case study of frozen ground prediction',
+    authors:'Ghosh, M.; Anshuman, A.; Kumar, M.', venue:'Journal of Hydrology X, 100201', year:2025,
+    link:'https://www.sciencedirect.com/science/article/pii/S2589915525000021'},
+  {id:'j3', type:'journal', title:'An in-situ daily dataset for benchmarking temporal variability of groundwater recharge',
+    authors:'Malakar, P.; Anshuman, A.; Kumar, M.; Boumis, G.; Clement, T. P.; Tashie, A.; Rathore, L.', venue:'Earth System Science Data Discussions, 2024, 1-19', year:2024,
+    link:'https://essd.copernicus.org/preprints/essd-2024-324/'},
+  {id:'j4', type:'journal', title:'Estimation of contamination release histories using meshless radial point collocation method and multiverse optimization',
+    authors:'Anshuman, A.; Eldho, T. I.', venue:'Journal of Hydroinformatics, 25(3), 738', year:2023,
+    link:'https://iwaponline.com/jh/article/25/3/738/94192/Estimation-of-contamination-release-histories'},
+  {id:'j5', type:'journal', title:'A parallel workflow framework using encoder-decoder LSTMs for uncertainty quantification in contaminant source identification in groundwater',
+    authors:'Anshuman, A.; Eldho, T. I.', venue:'Journal of Hydrology, 627, 129296', year:2023,
+    link:'https://www.sciencedirect.com/science/article/pii/S002216942300238X'},
+  {id:'j6', type:'journal', title:'Coupled flow and transport simulation involving rate-limited adsorption in highly heterogeneous unconfined aquifers using a local strong form meshless method',
+    authors:'Anshuman, A.; Eldho, T. I.', venue:'Engineering Analysis with Boundary Elements, 145, 1–12', year:2022,
+    link:'https://doi.org/10.1016/J.ENGANABOUND.2022.09.012'},
+  {id:'j7', type:'journal', title:'Meshfree local strong form-based method for transport simulation of nonlinearly adsorbing solutes in highly heterogeneous confined aquifers',
+    authors:'Anshuman, A.; Eldho, T. I.', venue:'Water Resources Management (Springer)', year:2022,
+    link:'https://doi.org/10.1007/s11269-022-03092-6'},
+  {id:'j8', type:'journal', title:'Entity aware sequence to sequence learning using LSTMs for estimation of groundwater contamination release history and transport parameters',
+    authors:'Anshuman, A.; Eldho, T. I.', venue:'Journal of Hydrology (Elsevier), 608, 127662', year:2022,
+    link:'http://dx.doi.org/10.1016/j.jhydrol.2022.127662'},
+  {id:'j9', type:'journal', title:'Meshfree radial point collocation-based coupled flow and transport model for simulation of multispecies linked first order reactions',
+    authors:'Anshuman, A.; Eldho, T. I.', venue:'Journal of Contaminant Hydrology (Elsevier), 229, 103582', year:2020,
+    link:'https://doi.org/10.1016/j.jconhyd.2019.103582'},
+  {id:'j10', type:'journal', title:'Estimation of Flow and Transport Parameters for a Confined Aquifer Using a Meshfree Simulation and Quantum Behaved Particle Swarm Optimization',
+    authors:'Anshuman, A.; Eldho, T. I.', venue:'Hydrology Journal, Indian Association of Hydrologists', year:2020, link:null},
+  {id:'j11', type:'journal', title:'Modeling of transport of first-order reaction networks in porous media using meshfree radial point collocation method',
+    authors:'Anshuman, A.; Eldho, T. I.', venue:'Computational Geosciences, 23(6), Springer, 1369-1385', year:2019,
+    link:'https://link.springer.com/article/10.1007/s10596-019-09906-8'},
+  {id:'j12', type:'journal', title:'Simulation of reactive transport in porous media using radial point collocation method',
+    authors:'Anshuman, A.; Eldho, T. I.; Singh, L. G.', venue:'Engineering Analysis with Boundary Elements, 104, 8-25', year:2019,
+    link:'https://www.sciencedirect.com/science/article/pii/S0955799718304405'},
+  {id:'j13', type:'journal', title:'Towards the use of conceptual models for water resource assessment in Indian tropical watersheds under monsoon-driven climatic conditions',
+    authors:'Anshuman, A.; Kunnath-Poovakka, A.; Eldho, T. I.', venue:'Environmental Earth Sciences, 78(9), 282', year:2019,
+    link:'https://link.springer.com/article/10.1007/s12665-019-8281-5'},
+  {id:'j14', type:'journal', title:'Performance evaluation of conceptual rainfall-runoff models GR4J and AWBM',
+    authors:'Anshuman, A.; Kunnath-Poovakka, A.; Eldho, T. I.', venue:'ISH Journal of Hydraulic Engineering', year:2018,
+    link:'https://www.tandfonline.com/doi/full/10.1080/09715010.2018.1556124'},
+
+  // ---- Invited Talks ----
+
+
+  {id:'t1', type:'talk', title:'Introduction to Porous Media Flows',
+    authors:'Anshuman, A.', venue:'IIT-ISM Dhanbad Refresher Course on Fluid Mechanics in Action: Principles, Advances, and Applications Refresher, being organized under the Malaviya Mission Teacher Training Programme (MMTTP)', year:2025, link:null},
+  {id:'t2', type:'talk', title:'Approaches to identify contaminant sources in groundwater',
+    authors:'Anshuman, A.', venue:'Workshop on Sustaining Groundwater Sources for Drinking Water Supply, NITI Aayog', year:2025, link:null},
+  {id:'t3', type:'talk', title:'Declining efficiency of snow-season soil water input to recharge groundwater in a warming climate',
+    authors:'Anshuman, A.', venue:'Seminar Series, Idaho Water Resources Research Institute', year:2024, link:null},
+
+  // ---- Conference Papers / Presentations ----
+  {id:'p1', type:'conference', title:'Modelling spatio-temporal groundwater levels using coupled surface water-groundwater model in the Subernarekha Basin',
+    authors:'Sai Kiran, B.; Anshuman, A.', venue:'HYDRO International 2025', year:2025, link:null},
+  {id:'p2', type:'conference', title:'Towards streamflow prediction in ungauged basins utilizing deep learning based models',
+    authors:'Yadav, J.; Anshuman, A.', venue:'HYDRO International 2025', year:2025, link:null},
+  {id:'p3', type:'conference', title:'Prediction of seasonal groundwater level using multilayer perceptron based neural network',
+    authors:'Nayak, B.; Anshuman, A.', venue:'HYDRO International 2025', year:2025, link:null},
+  {id:'p4', type:'conference', title:'Localized meshfree method for simulating unsaturated flow in porous media',
+    authors:'Samal, R.; Anshuman, A.', venue:'ICCMS 2025', year:2025, link:null},
+  {id:'p5', type:'conference', title:'Patterns of soil temperature changes with warming in snow-affected regions',
+    authors:'Ghosh, M.; Anshuman, A.; Kumar, M.', venue:'AGU Fall Meeting, Washington D.C.', year:2024, link:null},
+  {id:'p6', type:'conference', title:'Changing trends in soil water input rate across cold regions of the conterminous United States',
+    authors:'Anshuman, A.; Ghosh, M.; Kumar, M.', venue:'AGU Fall Meeting, Washington D.C.', year:2024, link:null},
+  {id:'p7', type:'conference', title:'Estimation of episodic recharge in snow-dominated regions',
+    authors:'Anshuman, A.; Kumar, M.', venue:'CIROH 1st Annual Training and Developers Conference, Salt Lake City, Utah', year:2023, link:null},
+  {id:'p8', type:'conference', title:'Feeding static values to LSTMs for Seq2Seq learning for simultaneous source identification and parameter estimation in groundwater',
+    authors:'Anshuman, A.; Eldho, T. I.', venue:'AGU Fall Meeting (Online)', year:2022, link:null},
+  {id:'p9', type:'conference', title:'Design of optimal bioremediation plan using meshless radial point collocation method and multiverse optimizer',
+    authors:'Anshuman, A.; Eldho, T. I.', venue:'IGWC 2022', year:2022, link:null},
+  {id:'p10', type:'conference', title:'Long short-term memory networks for identification of contamination sources in groundwater',
+    authors:'Anshuman, A.; Eldho, T. I.', venue:'AGU 2021 (Online)', year:2021, link:null},
+  {id:'p11', type:'conference', title:'Meshfree models for simulation of reactive transport in groundwater systems',
+    authors:'Anshuman, A.; Eldho, T. I.', venue:'EGU 2021 (Online)', year:2021, link:null},
+  {id:'p12', type:'conference', title:'Identifying contaminant sources in groundwater using kriging based surrogate model and particle swarm optimization',
+    authors:'Anshuman, A.; Eldho, T. I.', venue:'HYDRO 2021 (Online), Rourkela', year:2021, link:null},
+  {id:'p13', type:'conference', title:'Inverse modelling in groundwater using meshfree simulation and swarm optimization with application to source identification',
+    authors:'Anshuman, A.; Eldho, T. I.; Singh, L. G.', venue:'INGWC 2021', year:2021, link:null},
+  {id:'p14', type:'conference', title:'Deep neural network-based surrogate model linked with particle swarm optimization for identification of subsurface contamination sources',
+    authors:'Anshuman, A.; Eldho, T. I.', venue:'AGU Fall Meeting (Online)', year:2020, link:null},
+  {id:'p15', type:'conference', title:'A meshfree radial point collocation method based model for reactive transport simulation in groundwater',
+    authors:'Anshuman, A.; Eldho, T. I.', venue:'HYDRO 2019, Hyderabad', year:2019, link:null},
+  {id:'p16', type:'conference', title:'Simulation of Flow and Transport Process - Scope of Meshless Methods (Keynote)',
+    authors:'Anshuman, A.; Eldho, T. I.', venue:'ICCMS 2019, IIT Mandi', year:2019, link:null},
+  {id:'p17', type:'conference', title:'Optimal remedial design for removal of reactive contaminant using meshfree radial point collocation method and particle swarm optimization',
+    authors:'Anshuman, A.; Eldho, T. I.', venue:'AGU Fall Meeting, San Francisco, USA', year:2019, link:null},
+  {id:'p18', type:'conference', title:'Estimation of flow and transport parameters for a confined aquifer using a meshfree simulation and particle swarm optimization',
+    authors:'Anshuman, A.; Eldho, T. I.', venue:'IGWC 2019, IIT Roorkee', year:2019, link:null},
+  {id:'p19', type:'conference', title:'Identifying the sources of reactive contaminants in groundwater aquifers using simulation-optimization approach',
+    authors:'Anshuman, A.; Eldho, T. I.', venue:'EWRA 2019, Universidad Politecnica de Madrid, Madrid', year:2019, link:null},
+  {id:'p20', type:'conference', title:'Reactive transport simulation in porous media using meshfree radial point collocation method',
+    authors:'Anshuman, A.; Eldho, T. I.', venue:'NFiCE 2018, IIT Bombay', year:2018, link:null},
+  {id:'p21', type:'conference', title:'Performance evaluation of SWAT with a conceptual rainfall runoff model GR4J in a catchment in Upper Godavari River Basin',
+    authors:'Anshuman, A.; Kunnath-Poovakka, A.; Eldho, T. I.', venue:'SWAT 2018, IIT Madras', year:2018, link:null},
+  {id:'p22', type:'conference', title:'Performance evaluation of conceptual rainfall-runoff models GR4J and AWBM',
+    authors:'Anshuman, A.; Kunnath-Poovakka, A.; Eldho, T. I.', venue:'HYDRO 2017, L.D. College of Engineering, Ahmedabad', year:2017, link:null},
+];
+
+let currentFilter = 'all';
+let searchTerm = '';
+let sortMode = 'newest';
+const openBibtex = new Set();
+
+function displayAuthors(authors){
+  return authors.replace(/;\s*/g, ', ');
+}
+
+function bibtexFor(p){
+  const firstLast = p.authors.split(';')[0].trim().split(',')[0].trim().toLowerCase().replace(/[^a-z]/g,'');
+  const key = (firstLast || 'ref') + p.year;
+  const authorsField = p.authors.split(';').map(a=>a.trim()).join(' and ');
+  let entryType = 'misc';
+  const fields = [`author = {${authorsField}}`, `title = {${p.title}}`, `year = {${p.year}}`];
+  if(p.type==='journal'){ entryType='article'; fields.splice(2,0, `journal = {${p.venue}}`); }
+  else if(p.type==='conference'){ entryType='inproceedings'; fields.splice(2,0, `booktitle = {${p.venue}}`); }
+  else if(p.type==='chapter'){ entryType='incollection'; fields.splice(2,0, `booktitle = {${p.venue.replace('In: ','')}}`); }
+  else if(p.type==='talk'){ entryType='misc'; fields.splice(2,0, `howpublished = {${p.venue}}`); }
+  if(p.link) fields.push(`url = {${p.link}}`);
+  return `@${entryType}{${key},\n  ${fields.join(',\n  ')}\n}`;
+}
+
+function matchesSearch(p, term){
+  if(!term) return true;
+  term = term.toLowerCase();
+  return p.title.toLowerCase().includes(term) || p.authors.toLowerCase().includes(term) || p.venue.toLowerCase().includes(term);
+}
+
+function renderFilterBar(){
+  const bar = document.getElementById('filterBar');
+  const all = ['<button class="filterBtn ' + (currentFilter==='all'?'active':'') + '" data-filter="all">All <span class="cnt">(' + PUBS.filter(p=>matchesSearch(p,searchTerm)).length + ')</span></button>'];
+  TYPES.forEach(t=>{
+    const cnt = PUBS.filter(p=>p.type===t.key && matchesSearch(p,searchTerm)).length;
+    all.push(`<button class="filterBtn ${currentFilter===t.key?'active':''}" data-filter="${t.key}">${t.label} <span class="cnt">(${cnt})</span></button>`);
+  });
+  bar.innerHTML = all.join('');
+  bar.querySelectorAll('.filterBtn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{ currentFilter = btn.dataset.filter; renderAll(); });
+  });
+}
+
+function renderCard(p){
+  const typeLabel = TYPES.find(t=>t.key===p.type).label.replace(/s$/,'').toUpperCase();
+  const bibtex = bibtexFor(p);
+  const isOpen = openBibtex.has(p.id);
+  let actionLinks = '';
+  if(p.link){ actionLinks += `<a href="${p.link}" target="_blank">View publication →</a>`; }
+  actionLinks += `<button class="linklike bibtexToggle" data-id="${p.id}">${isOpen?'Hide BibTeX':'BibTeX'}</button>`;
+
+  return `<div class="pubCard">
+    <div class="pubTop">
+      <div>
+        <span class="tag">${typeLabel}</span>
+        <h3>${p.title}</h3>
+        <div class="authors">${displayAuthors(p.authors)}</div>
+        <div class="venue">${p.venue} · ${p.year}</div>
+      </div>
+    </div>
+    <div class="pubMeta">${actionLinks}</div>
+    <div class="bibtexBlock ${isOpen?'open':''}" id="bibtex-${p.id}">
+      <button class="copyBtn" data-bibtex="${encodeURIComponent(bibtex)}">Copy</button>
+      <div>${bibtex.replace(/</g,'&lt;')}</div>
+    </div>
+  </div>`;
+}
+
+function renderAll(){
+  renderFilterBar();
+  let list = PUBS.filter(p => (currentFilter==='all'||p.type===currentFilter) && matchesSearch(p, searchTerm));
+  if(sortMode==='newest') list.sort((a,b)=>b.year-a.year);
+  else if(sortMode==='oldest') list.sort((a,b)=>a.year-b.year);
+
+  const info = document.getElementById('resultsInfo');
+  info.textContent = `Showing ${list.length} of ${PUBS.length} entries`;
+
+  const container = document.getElementById('pubList');
+  if(list.length===0){
+    container.innerHTML = `<div class="emptyState">
+      <div class="big">🔍🌧️</div>
+      <h3>No matching publications</h3>
+      <p>Try a different search term, or clear the filter to see everything.</p>
+    </div>`;
+    return;
+  }
+  container.innerHTML = list.map(renderCard).join('');
+}
+
+document.getElementById('searchInput').addEventListener('input', (e)=>{
+  searchTerm = e.target.value;
+  renderAll();
+});
+document.getElementById('sortSelect').addEventListener('change', (e)=>{
+  sortMode = e.target.value;
+  renderAll();
+});
+
+document.getElementById('pubList').addEventListener('click', (e)=>{
+  if(e.target.matches('.bibtexToggle')){
+    const id = e.target.dataset.id;
+    if(openBibtex.has(id)) openBibtex.delete(id); else openBibtex.add(id);
+    renderAll();
+  }
+  if(e.target.matches('.copyBtn')){
+    const text = decodeURIComponent(e.target.dataset.bibtex);
+    navigator.clipboard?.writeText(text).then(()=>{
+      e.target.textContent = 'Copied!';
+      e.target.classList.add('copied');
+      setTimeout(()=>{ e.target.textContent='Copy'; e.target.classList.remove('copied'); }, 1500);
+    });
+  }
+});
+
+renderAll();
+
+document.querySelector('.navToggle')?.addEventListener('click', function(){
+  const nav = document.querySelector('nav.primary');
+  const isOpen = nav.style.display === 'flex';
+  nav.style.display = isOpen ? 'none' : 'flex';
+  nav.style.flexDirection = 'column';
+  nav.style.position='absolute'; nav.style.top='100%'; nav.style.left='0'; nav.style.right='0';
+  nav.style.background='#EFF4F1'; nav.style.padding='16px 24px'; nav.style.borderBottom='1px solid #C9D9D3';
+  nav.style.gap='14px';
+});
+</script>
+
+</body>
+</html>

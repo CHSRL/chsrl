@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Opportunities — Connected Hydro Systems Research Lab (CHSRL)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B2E38; --basin:#133A46; --paper:#EFF4F1; --paper-alt:#E2ECE7;
+    --teal:#0E7C86; --teal-deep:#0A5C64; --amber:#C97A2B; --line:#C9D9D3; --muted:#4C6A66;
+    --display:'IBM Plex Serif', Georgia, serif; --body:'IBM Plex Sans', -apple-system, sans-serif; --mono:'IBM Plex Mono','Courier New',monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--body); line-height:1.55; -webkit-font-smoothing:antialiased;}
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--amber); outline-offset:3px;}
+  svg{max-width:100%; display:block;}
+  .wrap{max-width:1160px; margin:0 auto; padding:0 28px;}
+  @media (max-width:640px){ .wrap{padding:0 18px;} }
+
+  .utilitybar{background:var(--basin); color:#CFE3E0;}
+  .utilitybar .wrap{display:flex; justify-content:flex-end; gap:22px; padding-top:8px; padding-bottom:8px; font-family:var(--mono); font-size:0.74em;}
+  .utilitybar a{text-decoration:none; opacity:0.85; transition:opacity .15s;}
+  .utilitybar a:hover{opacity:1; color:#fff;}
+
+  .mainnav{background:var(--paper); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:50;}
+  .mainnav .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:14px; padding-bottom:14px; position:relative;}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none;}
+  .brand .mark{width:34px; height:34px;}
+  .brand .word{font-family:var(--display); font-weight:700; font-size:1.18em; color:var(--basin); line-height:1.1;}
+  .brand .sub{display:block; font-family:var(--mono); font-size:0.62em; color:var(--muted); letter-spacing:0.06em; margin-top:1px;}
+  nav.primary{display:flex; gap:26px;}
+  nav.primary a{text-decoration:none; font-size:0.92em; font-weight:500; color:var(--ink); position:relative; padding:4px 0;}
+  nav.primary a::after{content:''; position:absolute; left:0; right:0; bottom:-2px; height:2px; background:var(--teal); transform:scaleX(0); transition:transform .18s ease; transform-origin:left;}
+  nav.primary a:hover::after{transform:scaleX(1);}
+  nav.primary a.current::after{transform:scaleX(1);}
+  nav.primary a.current{color:var(--teal-deep); font-weight:600;}
+  .navToggle{display:none; background:none; border:1px solid var(--line); border-radius:6px; padding:8px 10px; font-family:var(--mono); cursor:pointer;}
+  @media (max-width:860px){ nav.primary{display:none;} .navToggle{display:block;} }
+
+  .pageHeader{background:linear-gradient(180deg, var(--paper-alt), var(--paper) 85%); padding:52px 0 40px;}
+  .pageHeader .wrap{display:grid; grid-template-columns:1fr auto; align-items:center; gap:30px;}
+  @media (max-width:760px){ .pageHeader .wrap{grid-template-columns:1fr;} }
+  .eyebrow{font-family:var(--mono); font-size:0.78em; letter-spacing:0.1em; color:var(--teal-deep); text-transform:uppercase; margin-bottom:12px; display:flex; align-items:center; gap:8px;}
+  .eyebrow::before{content:''; width:22px; height:2px; background:var(--amber); display:inline-block;}
+  h1.pageTitle{font-family:var(--display); font-weight:700; font-size:2.1em; color:var(--basin); margin:0 0 10px;}
+  .pageDesc{font-size:1.02em; color:var(--muted); max-width:58ch; margin:0;}
+  .headerArt{width:110px; height:110px;}
+
+  section{padding:36px 0 64px;}
+  .sectionHead{margin-bottom:26px;}
+  h2.h2{font-family:var(--display); font-weight:700; font-size:1.4em; color:var(--basin); margin:0;}
+  .sectionSub{font-size:0.88em; color:var(--muted); margin:4px 0 0;}
+
+  .whyGrid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  @media (max-width:860px){ .whyGrid{grid-template-columns:1fr;} }
+  .whyCard{background:#fff; border:1px solid var(--line); border-radius:12px; padding:22px;}
+  .whyCard .icon{width:38px; height:38px; margin-bottom:12px;}
+  .whyCard h3{font-family:var(--display); font-size:1.05em; margin:0 0 6px; color:var(--basin);}
+  .whyCard p{font-size:0.87em; color:var(--muted); margin:0;}
+
+  .posList{display:flex; flex-direction:column; gap:16px;}
+  .posCard{background:#fff; border:1px solid var(--line); border-radius:14px; padding:24px 26px; display:flex; justify-content:space-between; gap:20px; align-items:flex-start; flex-wrap:wrap;}
+  .posStatus{font-family:var(--mono); font-size:0.7em; padding:3px 9px; border-radius:12px; display:inline-block; margin-bottom:10px;}
+  .status-open{background:#E2ECE7; color:#2A6B57;}
+  .posCard h3{font-family:var(--display); font-size:1.1em; margin:0 0 8px; color:var(--basin); max-width:56ch;}
+  .posMetaRow{display:flex; gap:16px; flex-wrap:wrap; font-family:var(--mono); font-size:0.78em; color:var(--muted); margin-bottom:10px;}
+  .posDesc{font-size:0.9em; color:var(--ink); max-width:60ch; margin:0;}
+  .posSide{display:flex; flex-direction:column; align-items:flex-end; gap:8px; flex-shrink:0;}
+  .applyBtn{
+    font-family:var(--mono); font-size:0.8em; padding:9px 18px; border-radius:8px; background:var(--teal);
+    color:#fff; text-decoration:none; white-space:nowrap; transition:background .15s;
+  }
+  .applyBtn:hover{background:var(--teal-deep);}
+
+  .internCard{background:#fff; border:1px solid var(--line); border-radius:14px; padding:28px; display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center;}
+  @media (max-width:700px){ .internCard{grid-template-columns:1fr;} }
+  .internCard h3{font-family:var(--display); font-size:1.2em; margin:0 0 8px; color:var(--basin);}
+  .internCard p{font-size:0.92em; color:var(--ink); max-width:64ch; margin:0 0 14px;}
+
+  .stepsRow{display:flex; gap:20px; flex-wrap:wrap;}
+  .stepCard{flex:1; min-width:180px; background:#fff; border:1px solid var(--line); border-radius:12px; padding:20px;}
+  .stepNum{
+    width:32px; height:32px; border-radius:50%; background:var(--teal); color:#fff; font-family:var(--mono);
+    font-weight:600; display:flex; align-items:center; justify-content:center; margin-bottom:12px; font-size:0.9em;
+  }
+  .stepCard h4{font-family:var(--display); font-size:0.98em; margin:0 0 6px; color:var(--basin);}
+  .stepCard p{font-size:0.83em; color:var(--muted); margin:0;}
+
+  .note{font-size:0.78em; color:var(--muted); font-family:var(--mono); margin-top:24px;}
+
+  footer{background:var(--ink); color:#B9CFCB; padding:44px 0 28px; font-size:0.86em;}
+  footer .wrap{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:32px;}
+  @media (max-width:760px){ footer .wrap{grid-template-columns:1fr; gap:22px;} }
+  footer h4{font-family:var(--mono); font-size:0.78em; letter-spacing:0.06em; text-transform:uppercase; color:#7FA39C; margin:0 0 12px;}
+  footer a{text-decoration:none; color:#DCEAE7;}
+  footer a:hover{text-decoration:underline;}
+  footer ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px;}
+  .footBottom{margin-top:32px; padding-top:20px; border-top:1px solid #22434B; font-family:var(--mono); font-size:0.78em; color:#7FA39C; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+
+  @media (prefers-reduced-motion: reduce){ * { animation-duration:0.001s !important; transition-duration:0.001s !important; } }
+</style>
+</head>
+<body>
+
+<div class="utilitybar">
+  <div class="wrap">
+    <a href="opportunities.html">Join Us</a>
+    <a href="publications.html">Publications</a>
+    <a href="software.html">Data</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</div>
+
+<div class="mainnav">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="mark" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="19" fill="#EFF4F1" stroke="#0E7C86" stroke-width="1.4"/>
+        <circle cx="20" cy="20" r="13" fill="none" stroke="#0E7C86" stroke-width="1.2" opacity="0.6"/>
+        <circle cx="20" cy="20" r="7" fill="#0E7C86" opacity="0.85"/>
+      </svg>
+      <span><span class="word">CHSRL</span><span class="sub">CONNECTED HYDRO SYSTEMS RESEARCH LAB</span></span>
+    </a>
+    <nav class="primary">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="people.html">People</a>
+      <a href="publications.html">Publications</a>
+      <a href="software.html">Software &amp; Tools</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="opportunities.html" class="current">Opportunities</a>
+    </nav>
+    <button class="navToggle" aria-label="Menu">☰ Menu</button>
+  </div>
+</div>
+
+<div class="pageHeader">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Careers</div>
+      <h1 class="pageTitle">Opportunities</h1>
+      <p class="pageDesc">Motivated candidates are encouraged to reach out for research opportunities in groundwater modeling, contaminant transport, and machine learning for hydrology.</p>
+    </div>
+    <svg class="headerArt" viewBox="0 0 110 110" fill="none">
+      <circle cx="55" cy="40" r="18" fill="none" stroke="#0E7C86" stroke-width="2"/>
+      <path d="M25 95 C25 70, 40 62, 55 62 C70 62, 85 70, 85 95" fill="none" stroke="#4CA394" stroke-width="2"/>
+      <circle cx="55" cy="40" r="4" fill="#C97A2B"/>
+    </svg>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="sectionHead">
+      <h2 class="h2">Why Join CHSRL</h2>
+    </div>
+    <div class="whyGrid">
+      <div class="whyCard">
+        <svg class="icon" viewBox="0 0 38 38"><circle cx="19" cy="19" r="15" fill="none" stroke="#0E7C86" stroke-width="2"/><path d="M12 19 L17 24 L27 12" fill="none" stroke="#C97A2B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Real research problems</h3>
+        <p>Work on groundwater and surface-water problems using advanced numerical and machine-learning methods, with results presented at HYDRO, ICCMS, AGU, and EGU.</p>
+      </div>
+      <div class="whyCard">
+        <svg class="icon" viewBox="0 0 38 38"><rect x="6" y="14" width="26" height="18" rx="2" fill="none" stroke="#0E7C86" stroke-width="2"/><path d="M6 20 L19 26 L32 20" fill="none" stroke="#0E7C86" stroke-width="2"/></svg>
+        <h3>Interdisciplinary collaboration</h3>
+        <p>The group collaborates with hydrologists, remote-sensing experts, and geophysicists on groundwater and climate-related research.</p>
+      </div>
+      <div class="whyCard">
+        <svg class="icon" viewBox="0 0 38 38"><circle cx="12" cy="12" r="4" fill="#4CA394"/><circle cx="26" cy="12" r="4" fill="#0E7C86"/><circle cx="19" cy="27" r="4" fill="#C97A2B"/><line x1="12" y1="12" x2="26" y2="12" stroke="#7FBBAC" stroke-width="1.6"/><line x1="12" y1="12" x2="19" y2="27" stroke="#7FBBAC" stroke-width="1.6"/><line x1="26" y1="12" x2="19" y2="27" stroke="#7FBBAC" stroke-width="1.6"/></svg>
+        <h3>Direct mentorship</h3>
+        <p>Work closely with Dr. Aatish Anshuman and current PhD/Masters students across numerical modeling and machine learning for hydrology.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--paper-alt); padding-top:56px;">
+  <div class="wrap">
+    <div class="sectionHead">
+      <h2 class="h2">Research Themes for New Scholars</h2>
+      <p class="sectionSub">Motivated candidates are encouraged to reach out under any of the following themes.</p>
+    </div>
+    <div class="posList">
+
+      <div class="posCard">
+        <div>
+          <span class="posStatus status-open">OPEN FOR INQUIRY</span>
+          <h3>Groundwater / surface water flux estimation</h3>
+          <div class="posMetaRow"><span>📍 IIT Bhubaneswar</span><span>🎓 PhD / MTech</span></div>
+          <p class="posDesc">Estimating fluxes between groundwater and surface water systems using field-informed numerical and data-driven models.</p>
+        </div>
+        <div class="posSide">
+          <a class="applyBtn" href="mailto:aanshuman@iitbbs.ac.in?subject=Research%20Opportunity%20-%20Flux%20Estimation">Contact PI</a>
+        </div>
+      </div>
+
+      <div class="posCard">
+        <div>
+          <span class="posStatus status-open">OPEN FOR INQUIRY</span>
+          <h3>Interaction between surface water and groundwater</h3>
+          <div class="posMetaRow"><span>📍 IIT Bhubaneswar</span><span>🎓 PhD / MTech</span></div>
+          <p class="posDesc">Studying coupled surface water-groundwater dynamics, following on from ongoing work such as spatio-temporal groundwater level modeling in the Subernarekha Basin.</p>
+        </div>
+        <div class="posSide">
+          <a class="applyBtn" href="mailto:aanshuman@iitbbs.ac.in?subject=Research%20Opportunity%20-%20Surface-Groundwater%20Interaction">Contact PI</a>
+        </div>
+      </div>
+
+      <div class="posCard">
+        <div>
+          <span class="posStatus status-open">OPEN FOR INQUIRY</span>
+          <h3>Numerical model development for hydrological applications</h3>
+          <div class="posMetaRow"><span>📍 IIT Bhubaneswar</span><span>🎓 PhD / MTech</span></div>
+          <p class="posDesc">Developing meshless/meshfree and other numerical models for flow and reactive transport in porous media.</p>
+        </div>
+        <div class="posSide">
+          <a class="applyBtn" href="mailto:aanshuman@iitbbs.ac.in?subject=Research%20Opportunity%20-%20Numerical%20Modeling">Contact PI</a>
+        </div>
+      </div>
+
+      <div class="posCard">
+        <div>
+          <span class="posStatus status-open">OPEN FOR INQUIRY</span>
+          <h3>Machine learning applications in hydrology</h3>
+          <div class="posMetaRow"><span>📍 IIT Bhubaneswar</span><span>🎓 PhD / MTech</span></div>
+          <p class="posDesc">Applying LSTM, deep learning, and swarm-based optimization to streamflow prediction, contaminant source identification, and groundwater level forecasting.</p>
+        </div>
+        <div class="posSide">
+          <a class="applyBtn" href="mailto:aanshuman@iitbbs.ac.in?subject=Research%20Opportunity%20-%20Machine%20Learning">Contact PI</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sectionHead">
+      <h2 class="h2">Research Internships</h2>
+      <p class="sectionSub">For undergraduate and Master's students — CHSRL has hosted winter and summer interns.</p>
+    </div>
+    <div class="internCard">
+      <div>
+        <h3>Summer & winter research internships</h3>
+        <p>CHSRL regularly hosts research interns working alongside PhD and Masters students on groundwater and hydrology projects. If you're interested in hands-on experience with numerical or machine-learning approaches to hydrology, reach out with your CV and areas of interest.</p>
+      </div>
+      <a class="applyBtn" href="mailto:aanshuman@iitbbs.ac.in?subject=Research%20Internship%20Inquiry" style="padding:14px 26px;">Contact the PI</a>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--paper-alt); padding-top:56px;">
+  <div class="wrap">
+    <div class="sectionHead">
+      <h2 class="h2">How to Apply</h2>
+      <p class="sectionSub">The same three steps for both PhD/Masters positions and internships.</p>
+    </div>
+    <div class="stepsRow">
+      <div class="stepCard">
+        <div class="stepNum">1</div>
+        <h4>Send your materials</h4>
+        <p>Email a CV and a short note on your research interest to <a href="mailto:aanshuman@iitbbs.ac.in">aanshuman@iitbbs.ac.in</a>.</p>
+      </div>
+      <div class="stepCard">
+        <div class="stepNum">2</div>
+        <h4>Conversation</h4>
+        <p>Shortlisted candidates are invited to discuss fit and project interests.</p>
+      </div>
+      <div class="stepCard">
+        <div class="stepNum">3</div>
+        <h4>Decision</h4>
+        <p>Admissions and funding follow the standard IIT Bhubaneswar timelines for the relevant program.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div>
+      <h4>Connected Hydro Systems Research Lab</h4>
+      <p style="max-width:32ch;">School of Infrastructure<br>Indian Institute of Technology Bhubaneswar<br>Bhubaneswar, Odisha, India</p>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="people.html">People</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="software.html">Software &amp; Tools</a></li>
+        <li><a href="teaching.html">Teaching</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="mailto:aanshuman@iitbbs.ac.in">aanshuman@iitbbs.ac.in</a></li>
+        <li><a href="https://github.com/aatishanshuman" target="_blank">GitHub</a></li>
+        <li><a href="https://scholar.google.com/citations?hl=en&user=&q=Aatish+Anshuman" target="_blank">Google Scholar</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footBottom">
+    <span>© 2026 Connected Hydro Systems Research Lab</span>
+    <span>Led by Dr. Aatish Anshuman, IIT Bhubaneswar</span>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.navToggle')?.addEventListener('click', function(){
+  const nav = document.querySelector('nav.primary');
+  const isOpen = nav.style.display === 'flex';
+  nav.style.display = isOpen ? 'none' : 'flex';
+  nav.style.flexDirection = 'column';
+  nav.style.position='absolute'; nav.style.top='100%'; nav.style.left='0'; nav.style.right='0';
+  nav.style.background='#EFF4F1'; nav.style.padding='16px 24px'; nav.style.borderBottom='1px solid #C9D9D3';
+  nav.style.gap='14px';
+});
+</script>
+
+</body>
+</html>

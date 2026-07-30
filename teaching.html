@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teaching — Connected Hydro Systems Research Lab (CHSRL)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B2E38; --basin:#133A46; --paper:#EFF4F1; --paper-alt:#E2ECE7;
+    --teal:#0E7C86; --teal-deep:#0A5C64; --amber:#C97A2B; --line:#C9D9D3; --muted:#4C6A66;
+    --display:'IBM Plex Serif', Georgia, serif; --body:'IBM Plex Sans', -apple-system, sans-serif; --mono:'IBM Plex Mono','Courier New',monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--body); line-height:1.55; -webkit-font-smoothing:antialiased;}
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--amber); outline-offset:3px;}
+  svg{max-width:100%; display:block;}
+  .wrap{max-width:1160px; margin:0 auto; padding:0 28px;}
+  @media (max-width:640px){ .wrap{padding:0 18px;} }
+
+  .utilitybar{background:var(--basin); color:#CFE3E0;}
+  .utilitybar .wrap{display:flex; justify-content:flex-end; gap:22px; padding-top:8px; padding-bottom:8px; font-family:var(--mono); font-size:0.74em;}
+  .utilitybar a{text-decoration:none; opacity:0.85; transition:opacity .15s;}
+  .utilitybar a:hover{opacity:1; color:#fff;}
+
+  .mainnav{background:var(--paper); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:50;}
+  .mainnav .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:14px; padding-bottom:14px; position:relative;}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none;}
+  .brand .mark{width:34px; height:34px;}
+  .brand .word{font-family:var(--display); font-weight:700; font-size:1.18em; color:var(--basin); line-height:1.1;}
+  .brand .sub{display:block; font-family:var(--mono); font-size:0.62em; color:var(--muted); letter-spacing:0.06em; margin-top:1px;}
+  nav.primary{display:flex; gap:26px;}
+  nav.primary a{text-decoration:none; font-size:0.92em; font-weight:500; color:var(--ink); position:relative; padding:4px 0;}
+  nav.primary a::after{content:''; position:absolute; left:0; right:0; bottom:-2px; height:2px; background:var(--teal); transform:scaleX(0); transition:transform .18s ease; transform-origin:left;}
+  nav.primary a:hover::after{transform:scaleX(1);}
+  nav.primary a.current::after{transform:scaleX(1);}
+  nav.primary a.current{color:var(--teal-deep); font-weight:600;}
+  .navToggle{display:none; background:none; border:1px solid var(--line); border-radius:6px; padding:8px 10px; font-family:var(--mono); cursor:pointer;}
+  @media (max-width:860px){ nav.primary{display:none;} .navToggle{display:block;} }
+
+  .pageHeader{background:linear-gradient(180deg, var(--paper-alt), var(--paper) 85%); padding:52px 0 40px;}
+  .pageHeader .wrap{display:grid; grid-template-columns:1fr auto; align-items:center; gap:30px;}
+  @media (max-width:760px){ .pageHeader .wrap{grid-template-columns:1fr;} }
+  .eyebrow{font-family:var(--mono); font-size:0.78em; letter-spacing:0.1em; color:var(--teal-deep); text-transform:uppercase; margin-bottom:12px; display:flex; align-items:center; gap:8px;}
+  .eyebrow::before{content:''; width:22px; height:2px; background:var(--amber); display:inline-block;}
+  h1.pageTitle{font-family:var(--display); font-weight:700; font-size:2.1em; color:var(--basin); margin:0 0 10px;}
+  .pageDesc{font-size:1.02em; color:var(--muted); max-width:58ch; margin:0;}
+  .headerArt{width:110px; height:110px;}
+
+  section{padding:36px 0 64px;}
+  .sectionHead{margin-bottom:26px;}
+  h2.h2{font-family:var(--display); font-weight:700; font-size:1.4em; color:var(--basin); margin:0;}
+  .sectionSub{font-size:0.88em; color:var(--muted); margin:4px 0 0;}
+
+  .courseList{display:flex; flex-direction:column; gap:16px;}
+  .courseCard{background:#fff; border:1px solid var(--line); border-radius:14px; padding:24px 26px; display:flex; justify-content:space-between; gap:20px; align-items:flex-start; flex-wrap:wrap;}
+  .courseCode{font-family:var(--mono); font-size:0.75em; color:var(--teal-deep); background:var(--paper-alt); padding:3px 9px; border-radius:5px; display:inline-block; margin-bottom:10px;}
+  .courseCard h3{font-family:var(--display); font-size:1.15em; margin:0 0 6px; color:var(--basin);}
+  .courseDesc{font-size:0.92em; color:var(--ink); max-width:62ch; margin:0;}
+
+  .projGrid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px;}
+  @media (max-width:760px){ .projGrid{grid-template-columns:1fr;} }
+  .projCard{background:#fff; border:1px solid var(--line); border-radius:14px; padding:22px;}
+  .projTag{font-family:var(--mono); font-size:0.68em; color:var(--teal-deep); background:var(--paper-alt); padding:3px 9px; border-radius:5px; margin-bottom:10px; display:inline-block;}
+  .projCard h3{font-family:var(--display); font-size:1.02em; margin:0 0 6px; color:var(--basin);}
+  .projMeta{font-size:0.82em; color:var(--muted); font-family:var(--mono); margin-bottom:8px;}
+  .projDesc{font-size:0.88em; color:var(--ink); margin:0;}
+
+  .comingSoon{background:#fff; border:1px dashed var(--line); border-radius:14px; padding:34px; text-align:center;}
+  .comingSoon p{color:var(--muted); font-size:0.94em; margin:0;}
+
+  .note{font-size:0.78em; color:var(--muted); font-family:var(--mono); margin-top:22px;}
+
+  footer{background:var(--ink); color:#B9CFCB; padding:44px 0 28px; font-size:0.86em;}
+  footer .wrap{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:32px;}
+  @media (max-width:760px){ footer .wrap{grid-template-columns:1fr; gap:22px;} }
+  footer h4{font-family:var(--mono); font-size:0.78em; letter-spacing:0.06em; text-transform:uppercase; color:#7FA39C; margin:0 0 12px;}
+  footer a{text-decoration:none; color:#DCEAE7;}
+  footer a:hover{text-decoration:underline;}
+  footer ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px;}
+  .footBottom{margin-top:32px; padding-top:20px; border-top:1px solid #22434B; font-family:var(--mono); font-size:0.78em; color:#7FA39C; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+
+  @media (prefers-reduced-motion: reduce){ * { animation-duration:0.001s !important; transition-duration:0.001s !important; } }
+</style>
+</head>
+<body>
+
+<div class="utilitybar">
+  <div class="wrap">
+    <a href="opportunities.html">Join Us</a>
+    <a href="publications.html">Publications</a>
+    <a href="software.html">Data</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</div>
+
+<div class="mainnav">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="mark" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="19" fill="#EFF4F1" stroke="#0E7C86" stroke-width="1.4"/>
+        <circle cx="20" cy="20" r="13" fill="none" stroke="#0E7C86" stroke-width="1.2" opacity="0.6"/>
+        <circle cx="20" cy="20" r="7" fill="#0E7C86" opacity="0.85"/>
+      </svg>
+      <span><span class="word">CHSRL</span><span class="sub">CONNECTED HYDRO SYSTEMS RESEARCH LAB</span></span>
+    </a>
+    <nav class="primary">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="people.html">People</a>
+      <a href="publications.html">Publications</a>
+      <a href="software.html">Software &amp; Tools</a>
+      <a href="teaching.html" class="current">Teaching</a>
+      <a href="opportunities.html">Opportunities</a>
+    </nav>
+    <button class="navToggle" aria-label="Menu">☰ Menu</button>
+  </div>
+</div>
+
+<div class="pageHeader">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">In the Classroom</div>
+      <h1 class="pageTitle">Teaching</h1>
+      <p class="pageDesc">Courses taught at IIT Bhubaneswar, alongside student research projects from current lab members.</p>
+    </div>
+    <svg class="headerArt" viewBox="0 0 110 110" fill="none">
+      <rect x="20" y="20" width="70" height="52" rx="4" fill="none" stroke="#0E7C86" stroke-width="2"/>
+      <line x1="20" y1="34" x2="90" y2="34" stroke="#0E7C86" stroke-width="1.4" opacity="0.6"/>
+      <circle cx="40" cy="90" r="4" fill="#4CA394"/>
+      <circle cx="55" cy="90" r="4" fill="#4CA394"/>
+      <circle cx="70" cy="90" r="4" fill="#4CA394"/>
+    </svg>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="sectionHead">
+      <h2 class="h2">Courses Taught</h2>
+      <p class="sectionSub">Courses taught at IIT Bhubaneswar.</p>
+    </div>
+    <div class="courseList">
+
+      <div class="courseCard">
+        <div>
+          <span class="courseCode">GRADUATE / UNDERGRADUATE</span>
+          <h3>Surface Hydrology</h3>
+          <p class="courseDesc">Covers the fundamentals of the hydrologic cycle, precipitation, evapotranspiration, infiltration, and rainfall-runoff processes, along with streamflow analysis and conceptual/physically based catchment modeling.</p>
+        </div>
+      </div>
+
+      <div class="courseCard">
+        <div>
+          <span class="courseCode">GRADUATE / UNDERGRADUATE</span>
+          <h3>Groundwater Hydrology</h3>
+          <p class="courseDesc">Covers groundwater occurrence and flow, aquifer properties, well hydraulics, groundwater recharge, and an introduction to numerical and machine-learning approaches for groundwater modeling.</p>
+        </div>
+      </div>
+
+      <div class="courseCard">
+        <div>
+          <span class="courseCode">LABORATORY</span>
+          <h3>Hydraulics / Water Resources Engineering Laboratory</h3>
+          <p class="courseDesc">Hands-on laboratory course covering experiments in open-channel flow, pipe flow, hydraulic structures, and water resources measurement techniques.</p>
+        </div>
+      </div>
+
+      <div class="courseCard">
+        <div>
+          <span class="courseCode">UNDERGRADUATE</span>
+          <h3>Engineering Drawing and Graphics</h3>
+          <p class="courseDesc">Foundational course in engineering drawing conventions, orthographic and isometric projections, and technical graphics for civil engineering students.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--paper-alt); padding-top:56px;">
+  <div class="wrap">
+    <div class="sectionHead">
+      <h2 class="h2">Student Research Projects</h2>
+      <p class="sectionSub">Ongoing thesis and research work by current PhD and Masters students.</p>
+    </div>
+    <div class="projGrid">
+
+      <div class="projCard">
+        <span class="projTag">PHD RESEARCH</span>
+        <h3>Groundwater recharge dynamics</h3>
+        <div class="projMeta">Banaja Nayak · in progress</div>
+        <p class="projDesc">Presented related work on seasonal groundwater level prediction using a multilayer perceptron based neural network at HYDRO International 2025.</p>
+      </div>
+
+      <div class="projCard">
+        <span class="projTag">PHD RESEARCH</span>
+        <h3>Regionalized streamflow simulations</h3>
+        <div class="projMeta">Jyoti Yadav · in progress</div>
+        <p class="projDesc">Presented work on streamflow prediction in ungauged basins utilizing deep-learning based models at HYDRO International 2025.</p>
+      </div>
+
+    
+
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div>
+      <h4>Connected Hydro Systems Research Lab</h4>
+      <p style="max-width:32ch;">School of Infrastructure<br>Indian Institute of Technology Bhubaneswar<br>Bhubaneswar, Odisha, India</p>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="people.html">People</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="software.html">Software &amp; Tools</a></li>
+        <li><a href="teaching.html">Teaching</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="mailto:aanshuman@iitbbs.ac.in">aanshuman@iitbbs.ac.in</a></li>
+        <li><a href="https://github.com/aatishanshuman" target="_blank">GitHub</a></li>
+        <li><a href="https://scholar.google.com/citations?hl=en&user=&q=Aatish+Anshuman" target="_blank">Google Scholar</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footBottom">
+    <span>© 2026 Connected Hydro Systems Research Lab</span>
+    <span>Led by Dr. Aatish Anshuman, IIT Bhubaneswar</span>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.navToggle')?.addEventListener('click', function(){
+  const nav = document.querySelector('nav.primary');
+  const isOpen = nav.style.display === 'flex';
+  nav.style.display = isOpen ? 'none' : 'flex';
+  nav.style.flexDirection = 'column';
+  nav.style.position='absolute'; nav.style.top='100%'; nav.style.left='0'; nav.style.right='0';
+  nav.style.background='#EFF4F1'; nav.style.padding='16px 24px'; nav.style.borderBottom='1px solid #C9D9D3';
+  nav.style.gap='14px';
+});
+</script>
+
+</body>
+</html>
